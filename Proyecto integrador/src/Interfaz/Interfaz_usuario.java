@@ -140,6 +140,7 @@ public class Interfaz_usuario extends javax.swing.JFrame {
         jLabel37.setText("DATOS DE DEL CLIENTE.");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 

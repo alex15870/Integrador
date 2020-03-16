@@ -5,6 +5,8 @@
  */
 package Interfaz;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lv1821
@@ -32,9 +34,9 @@ public class Inicio_sesion extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        btnCerrar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        Inicio_sesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -63,21 +65,21 @@ public class Inicio_sesion extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jButton1.setText("CERRAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCerrar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnCerrar.setText("CERRAR");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCerrarActionPerformed(evt);
             }
         });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/persona.jpg"))); // NOI18N
 
-        jButton2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jButton2.setText("INICIAR SESIÓN");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Inicio_sesion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        Inicio_sesion.setText("INICIAR SESIÓN");
+        Inicio_sesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                Inicio_sesionActionPerformed(evt);
             }
         });
 
@@ -89,10 +91,10 @@ public class Inicio_sesion extends javax.swing.JFrame {
                 .addGap(73, 73, 73)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Inicio_sesion, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(jButton1)))
+                        .addComponent(btnCerrar)))
                 .addContainerGap(51, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -112,9 +114,9 @@ public class Inicio_sesion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(Inicio_sesion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(btnCerrar)
                 .addGap(12, 12, 12))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -153,13 +155,28 @@ public class Inicio_sesion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        this.dispose();
+        
+    }//GEN-LAST:event_btnCerrarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void Inicio_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inicio_sesionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        Negocio.Conexion.setcuenta(jTextField1.getText(), jPasswordField1.getText());
+        Negocio.Conexion.getConexion();
+        if(Negocio.Conexion.getstatus()){
+            Interfaz_usuario obj = new Interfaz_usuario();
+            obj.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "USUARIO Y PASSWORD INCORRECTOS","Error De Conexion",JOptionPane.ERROR_MESSAGE);
+            jTextField1.setText("");
+            jPasswordField1.setText("");
+        }
+        
+        
+    }//GEN-LAST:event_Inicio_sesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,8 +214,8 @@ public class Inicio_sesion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Inicio_sesion;
+    private javax.swing.JButton btnCerrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
