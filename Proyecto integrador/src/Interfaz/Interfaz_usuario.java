@@ -5,6 +5,10 @@
  */
 package Interfaz;
 
+import Negocio.*;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lv1821
@@ -44,15 +48,15 @@ public class Interfaz_usuario extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
-        jTextField16 = new javax.swing.JTextField();
-        jTextField17 = new javax.swing.JTextField();
-        jButton9 = new javax.swing.JButton();
+        txt_Rcliente1 = new javax.swing.JTextField();
+        txt_Rcliente2 = new javax.swing.JTextField();
+        txt_Rcliente3 = new javax.swing.JTextField();
+        txt_Rcliente4 = new javax.swing.JTextField();
+        txt_Rcliente5 = new javax.swing.JTextField();
+        txt_Rcliente6 = new javax.swing.JTextField();
+        btnRcliente = new javax.swing.JButton();
         jLabel39 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        comboRcliente = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -214,14 +218,19 @@ public class Interfaz_usuario extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel17.setText("Enganche:");
 
-        jButton9.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jButton9.setText("REGISTRAR");
+        btnRcliente.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnRcliente.setText("REGISTRAR");
+        btnRcliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRclienteActionPerformed(evt);
+            }
+        });
 
         jLabel39.setBackground(new java.awt.Color(102, 102, 0));
         jLabel39.setFont(new java.awt.Font("Century Schoolbook", 1, 36)); // NOI18N
         jLabel39.setText("REGISTRO DEL CLIENTE.");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Norte", "Monte Carlo", "Villa ITSON", "Nuevo Cajeme" }));
+        comboRcliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Norte", "Monte Carlo", "Villa ITSON", "Nuevo Cajeme" }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -243,20 +252,20 @@ public class Interfaz_usuario extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(comboRcliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField11, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                                .addComponent(jTextField12)
-                                .addComponent(jTextField13)
-                                .addComponent(jTextField14)
-                                .addComponent(jTextField16)
-                                .addComponent(jTextField17))))
+                                .addComponent(txt_Rcliente1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                                .addComponent(txt_Rcliente2)
+                                .addComponent(txt_Rcliente3)
+                                .addComponent(txt_Rcliente4)
+                                .addComponent(txt_Rcliente5)
+                                .addComponent(txt_Rcliente6))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(104, 104, 104)
                         .addComponent(jLabel39))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(277, 277, 277)
-                        .addComponent(jButton9)))
+                        .addComponent(btnRcliente)))
                 .addContainerGap(209, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -267,33 +276,33 @@ public class Interfaz_usuario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Rcliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Rcliente2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Rcliente3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Rcliente4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboRcliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Rcliente5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Rcliente6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
-                .addComponent(jButton9)
+                .addComponent(btnRcliente)
                 .addContainerGap(96, Short.MAX_VALUE))
         );
 
@@ -842,6 +851,41 @@ public class Interfaz_usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void btnRclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRclienteActionPerformed
+        // TODO add your handling code here:
+        
+        if(txt_Rcliente1.getText().isEmpty() && txt_Rcliente2.getText().isEmpty() && txt_Rcliente3.getText().isEmpty() && txt_Rcliente4.getText().isEmpty() && txt_Rcliente5.getText().isEmpty() && txt_Rcliente6.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Ingrese bien la informacion", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            txt_Rcliente1.requestFocus();
+            txt_Rcliente2.requestFocus();
+            txt_Rcliente3.requestFocus();
+            txt_Rcliente4.requestFocus();
+            txt_Rcliente5.requestFocus();
+            txt_Rcliente6.requestFocus();
+        } else {
+            try {
+                    Clientes.AgregarCliente(txt_Rcliente1.getText(), txt_Rcliente2.getText(), txt_Rcliente3.getText(), txt_Rcliente4.getText(), comboRcliente.getSelectedItem().toString(), Float.parseFloat(txt_Rcliente5.getText()), Integer.parseInt(txt_Rcliente6.getText()));
+                    txt_Rcliente1.setText("");
+                    txt_Rcliente2.setText("");
+                    txt_Rcliente3.setText("");
+                    txt_Rcliente4.setText("");
+                    txt_Rcliente5.setText("");
+                    txt_Rcliente6.setText("");
+                    txt_Rcliente1.requestFocus();
+                    txt_Rcliente2.requestFocus();
+                    txt_Rcliente3.requestFocus();
+                    txt_Rcliente4.requestFocus();
+                    txt_Rcliente5.requestFocus();
+                    txt_Rcliente6.requestFocus();
+                    JOptionPane.showMessageDialog(this, "LOS DATOS HAN SIGO GUARDADOS CORRECTAMENTE");
+                
+            }catch (SQLException e){
+            }
+        }
+        
+        
+    }//GEN-LAST:event_btnRclienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -878,6 +922,8 @@ public class Interfaz_usuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRcliente;
+    private javax.swing.JComboBox<String> comboRcliente;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -889,9 +935,7 @@ public class Interfaz_usuario extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -943,12 +987,6 @@ public class Interfaz_usuario extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField20;
@@ -970,5 +1008,11 @@ public class Interfaz_usuario extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField txt_Rcliente1;
+    private javax.swing.JTextField txt_Rcliente2;
+    private javax.swing.JTextField txt_Rcliente3;
+    private javax.swing.JTextField txt_Rcliente4;
+    private javax.swing.JTextField txt_Rcliente5;
+    private javax.swing.JTextField txt_Rcliente6;
     // End of variables declaration//GEN-END:variables
 }
