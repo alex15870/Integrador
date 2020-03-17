@@ -6,8 +6,15 @@
 package Interfaz;
 
 import Negocio.*;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,11 +22,51 @@ import javax.swing.JOptionPane;
  */
 public class Interfaz_usuario extends javax.swing.JFrame {
 
+    static ResultSet res;
+    int cont;
+    
     /**
      * Creates new form Interfaz_usuario
      */
     public Interfaz_usuario() {
         initComponents();
+        CargarCobrador();
+        tablaCobrador.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent mouse_evt){
+                JTable table = (JTable) mouse_evt.getSource();
+                Point point = mouse_evt.getPoint();
+                int row = table.rowAtPoint(point);
+                if (mouse_evt.getClickCount() == 2){
+                    txt_Midcobrador.setText(tablaCobrador.getValueAt(tablaCobrador.getSelectedRow(), 0).toString());
+                    txt_Mnombrecobrador.setText(tablaCobrador.getValueAt(tablaCobrador.getSelectedRow(), 1).toString());
+                    txt_Mcobradorzona.setText(tablaCobrador.getValueAt(tablaCobrador.getSelectedRow(), 2).toString());
+                    txt_MdireccionCobrador.setText(tablaCobrador.getValueAt(tablaCobrador.getSelectedRow(), 3).toString());
+                    txt_McelularCobrador.setText(tablaCobrador.getValueAt(tablaCobrador.getSelectedRow(), 4).toString());
+                }
+                
+            }
+        });
+    }
+    
+    
+    
+    public void CargarCobrador(){
+        DefaultTableModel modelo = (DefaultTableModel) tablaCobrador.getModel();
+        modelo.setRowCount(0);
+        res = Negocio.Conexion.Consulta("select * from Cobrador");
+        try{
+            while(res.next()){
+                Vector v = new Vector();
+                v.add(res.getInt(1));
+                v.add(res.getString(2));
+                v.add(res.getString(3));
+                v.add(res.getString(4));
+                v.add(res.getString(5));
+                modelo.addRow(v);
+                tablaCobrador.setModel(modelo);
+            }
+        }catch (SQLException e){
+        }
     }
 
     /**
@@ -102,27 +149,27 @@ public class Interfaz_usuario extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txt_Rcobrador = new javax.swing.JTextField();
+        txt_Rcobrador2 = new javax.swing.JTextField();
+        txt_Rcobrador3 = new javax.swing.JTextField();
+        btnRCobrador = new javax.swing.JButton();
+        comboRcobrador = new javax.swing.JComboBox<>();
         jLabel35 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaCobrador = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        txt_Midcobrador = new javax.swing.JTextField();
+        txt_Mnombrecobrador = new javax.swing.JTextField();
+        txt_Mcobradorzona = new javax.swing.JTextField();
+        txt_MdireccionCobrador = new javax.swing.JTextField();
+        txt_McelularCobrador = new javax.swing.JTextField();
+        btnMcobrador = new javax.swing.JButton();
+        btnEcobrador = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -324,7 +371,15 @@ public class Interfaz_usuario extends javax.swing.JFrame {
             new String [] {
                 "ID", "Nombre", "Fecha", "Dirección", "Telefono", "Sector", "Articulo", "Enganche"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         jLabel19.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -592,30 +647,35 @@ public class Interfaz_usuario extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel5.setText("Celular:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txt_Rcobrador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txt_RcobradorActionPerformed(evt);
             }
         });
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        txt_Rcobrador2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                txt_Rcobrador2ActionPerformed(evt);
             }
         });
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        txt_Rcobrador3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                txt_Rcobrador3ActionPerformed(evt);
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(102, 102, 0));
-        jButton6.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(102, 102, 102));
-        jButton6.setText("REGISTRAR");
+        btnRCobrador.setBackground(new java.awt.Color(102, 102, 0));
+        btnRCobrador.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnRCobrador.setForeground(new java.awt.Color(102, 102, 102));
+        btnRCobrador.setText("REGISTRAR");
+        btnRCobrador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRCobradorActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Norte", "Monte Carlo", "Villa ITSON", "Nuevo Cajeme" }));
+        comboRcobrador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Norte", "Monte Carlo", "Villa ITSON", "Nuevo Cajeme" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -633,16 +693,16 @@ public class Interfaz_usuario extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(82, 82, 82)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4))))
+                            .addComponent(txt_Rcobrador2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                            .addComponent(comboRcobrador, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_Rcobrador, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_Rcobrador3))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                 .addComponent(jLabel35)
                 .addGap(46, 46, 46))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton6)
+                .addComponent(btnRCobrador)
                 .addGap(323, 323, 323))
         );
         jPanel3Layout.setVerticalGroup(
@@ -654,23 +714,23 @@ public class Interfaz_usuario extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_Rcobrador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel35))
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(comboRcobrador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_Rcobrador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_Rcobrador3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(65, 65, 65)
-                .addComponent(jButton6)
+                .addComponent(btnRCobrador)
                 .addContainerGap(176, Short.MAX_VALUE))
         );
 
@@ -678,8 +738,8 @@ public class Interfaz_usuario extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 0));
 
-        jTable1.setBackground(new java.awt.Color(102, 102, 102));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaCobrador.setBackground(new java.awt.Color(102, 102, 102));
+        tablaCobrador.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -687,10 +747,23 @@ public class Interfaz_usuario extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Edad", "Direccion", "Color"
+                "ID", "Nombre", "Zona", "Direccion", "Celular"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaCobrador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaCobradorMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaCobrador);
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel6.setText("ID:");
@@ -699,27 +772,37 @@ public class Interfaz_usuario extends javax.swing.JFrame {
         jLabel7.setText("Nombre:");
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jLabel8.setText("Edad:");
+        jLabel8.setText("Zona:");
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel9.setText("Dirección:");
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jLabel10.setText("Color:");
+        jLabel10.setText("Celular:");
 
-        jTextField5.setEditable(false);
+        txt_Midcobrador.setEditable(false);
 
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        txt_Mnombrecobrador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                txt_MnombrecobradorActionPerformed(evt);
             }
         });
 
-        jButton7.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jButton7.setText("MODIFICAR");
+        btnMcobrador.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnMcobrador.setText("MODIFICAR");
+        btnMcobrador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMcobradorActionPerformed(evt);
+            }
+        });
 
-        jButton8.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jButton8.setText("ELIMINAR");
+        btnEcobrador.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnEcobrador.setText("ELIMINAR");
+        btnEcobrador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEcobradorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -736,9 +819,9 @@ public class Interfaz_usuario extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addGap(47, 47, 47)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField5)
-                            .addComponent(jTextField7)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
+                            .addComponent(txt_Midcobrador)
+                            .addComponent(txt_Mnombrecobrador)
+                            .addComponent(txt_Mcobradorzona, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
                         .addGap(36, 36, 36)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -747,14 +830,14 @@ public class Interfaz_usuario extends javax.swing.JFrame {
                                     .addComponent(jLabel9))
                                 .addGap(34, 34, 34)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField9)
-                                    .addComponent(jTextField10, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)))
+                                    .addComponent(txt_MdireccionCobrador)
+                                    .addComponent(txt_McelularCobrador, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(24, 24, 24)
-                                .addComponent(jButton8))))
+                                .addComponent(btnEcobrador))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(202, 202, 202)
-                        .addComponent(jButton7)))
+                        .addComponent(btnMcobrador)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -764,22 +847,22 @@ public class Interfaz_usuario extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Midcobrador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_MdireccionCobrador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Mnombrecobrador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_McelularCobrador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Mcobradorzona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8))
+                    .addComponent(btnMcobrador)
+                    .addComponent(btnEcobrador))
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -820,17 +903,17 @@ public class Interfaz_usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txt_RcobradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_RcobradorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txt_RcobradorActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void txt_Rcobrador3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_Rcobrador3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_txt_Rcobrador3ActionPerformed
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void txt_MnombrecobradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_MnombrecobradorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    }//GEN-LAST:event_txt_MnombrecobradorActionPerformed
 
     private void jTextField23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField23ActionPerformed
         // TODO add your handling code here:
@@ -840,9 +923,9 @@ public class Interfaz_usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField18ActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txt_Rcobrador2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_Rcobrador2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txt_Rcobrador2ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
@@ -887,6 +970,94 @@ public class Interfaz_usuario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnRclienteActionPerformed
 
+    private void btnRCobradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRCobradorActionPerformed
+        // TODO add your handling code here:
+        
+        if(txt_Rcobrador.getText().isEmpty() && txt_Rcobrador2.getText().isEmpty() && txt_Rcobrador3.getText().isEmpty() ){
+            JOptionPane.showMessageDialog(this, "Ingrese bien la informacion", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            txt_Rcobrador.requestFocus();
+            txt_Rcobrador2.requestFocus();
+            txt_Rcobrador3.requestFocus();
+        } else {
+            try {
+                    Cobrador.AgregarCobrador(txt_Rcobrador.getText(), comboRcobrador.getSelectedItem().toString(), txt_Rcobrador2.getText(), txt_Rcobrador3.getText());
+                    txt_Rcobrador.setText("");
+                    txt_Rcobrador2.setText("");
+                    txt_Rcobrador3.setText("");
+                    txt_Rcobrador.requestFocus();
+                    txt_Rcobrador2.requestFocus();
+                    txt_Rcobrador3.requestFocus();
+                    comboRcobrador.requestFocus();
+                    JOptionPane.showMessageDialog(this, "LOS DATOS HAN SIGO GUARDADOS CORRECTAMENTE");
+                
+            }catch (SQLException e){
+            }
+        }
+        CargarCobrador();
+        
+    }//GEN-LAST:event_btnRCobradorActionPerformed
+
+    private void tablaCobradorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCobradorMouseClicked
+        // TODO add your handling code here:
+        
+        
+        
+    }//GEN-LAST:event_tablaCobradorMouseClicked
+
+    private void btnMcobradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMcobradorActionPerformed
+        // TODO add your handling code here:
+        if(txt_Midcobrador.getText().isEmpty() && txt_Mnombrecobrador.getText().isEmpty() && txt_Mcobradorzona.getText().isEmpty() && txt_MdireccionCobrador.getText().isEmpty() && txt_McelularCobrador.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Ingrese bien la informacion", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            txt_Midcobrador.requestFocus();
+            txt_Mnombrecobrador.requestFocus();
+            txt_Mcobradorzona.requestFocus();
+            txt_MdireccionCobrador.requestFocus();
+            txt_McelularCobrador.requestFocus();
+        } else {
+            try {
+                    Cobrador.ModificarCobrador(Integer.parseInt(txt_Midcobrador.getText()), txt_Mnombrecobrador.getText(), txt_Mcobradorzona.getText(), txt_MdireccionCobrador.getText(), txt_McelularCobrador.getText());
+                    txt_Midcobrador.setText("");
+                    txt_Mnombrecobrador.setText("");
+                    txt_Mcobradorzona.setText("");
+                    txt_MdireccionCobrador.setText("");
+                    txt_McelularCobrador.setText("");
+                    txt_Midcobrador.requestFocus();
+                    txt_Mnombrecobrador.requestFocus();
+                    txt_Mcobradorzona.requestFocus();
+                    txt_MdireccionCobrador.requestFocus();
+                    txt_McelularCobrador.requestFocus();
+                    JOptionPane.showMessageDialog(this, "LOS DATOS HAN SIGO GUARDADOS CORRECTAMENTE");
+                
+            }catch (SQLException e){
+            }
+        }
+        CargarCobrador();
+    }//GEN-LAST:event_btnMcobradorActionPerformed
+
+    private void btnEcobradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEcobradorActionPerformed
+        // TODO add your handling code here:
+        
+        if(txt_Midcobrador.getText().isEmpty() && txt_Mnombrecobrador.getText().isEmpty() && txt_Mcobradorzona.getText().isEmpty() && txt_MdireccionCobrador.getText().isEmpty() && txt_McelularCobrador.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Ingrese bien la informacion", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            txt_Midcobrador.requestFocus();
+        } else {
+            try {
+                    Cobrador.EliminarCobrador(Integer.parseInt(txt_Midcobrador.getText()));
+                    txt_Midcobrador.setText("");
+                    txt_Mnombrecobrador.setText("");
+                    txt_Mcobradorzona.setText("");
+                    txt_MdireccionCobrador.setText("");
+                    txt_McelularCobrador.setText("");
+                    txt_Midcobrador.requestFocus();
+                    JOptionPane.showMessageDialog(this, "LOS DATOS HAN SIGO ELIMINADOS CORRECTAMENTE");
+                
+            }catch (SQLException e){
+            }
+        }
+        CargarCobrador();
+        
+    }//GEN-LAST:event_btnEcobradorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -923,8 +1094,12 @@ public class Interfaz_usuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEcobrador;
+    private javax.swing.JButton btnMcobrador;
+    private javax.swing.JButton btnRCobrador;
     private javax.swing.JButton btnRcliente;
     private javax.swing.JComboBox<String> comboRcliente;
+    private javax.swing.JComboBox<String> comboRcobrador;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -933,10 +1108,6 @@ public class Interfaz_usuario extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -984,10 +1155,7 @@ public class Interfaz_usuario extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField20;
@@ -1000,20 +1168,23 @@ public class Interfaz_usuario extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField27;
     private javax.swing.JTextField jTextField28;
     private javax.swing.JTextField jTextField29;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField30;
     private javax.swing.JTextField jTextField31;
     private javax.swing.JTextField jTextField32;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTable tablaCobrador;
+    private javax.swing.JTextField txt_McelularCobrador;
+    private javax.swing.JTextField txt_Mcobradorzona;
+    private javax.swing.JTextField txt_MdireccionCobrador;
+    private javax.swing.JTextField txt_Midcobrador;
+    private javax.swing.JTextField txt_Mnombrecobrador;
     private javax.swing.JTextField txt_Rcliente1;
     private javax.swing.JTextField txt_Rcliente2;
     private javax.swing.JTextField txt_Rcliente3;
     private javax.swing.JTextField txt_Rcliente4;
     private javax.swing.JTextField txt_Rcliente5;
     private javax.swing.JTextField txt_Rcliente6;
+    private javax.swing.JTextField txt_Rcobrador;
+    private javax.swing.JTextField txt_Rcobrador2;
+    private javax.swing.JTextField txt_Rcobrador3;
     // End of variables declaration//GEN-END:variables
 }
