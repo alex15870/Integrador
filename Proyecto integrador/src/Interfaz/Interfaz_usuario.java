@@ -77,6 +77,15 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
             }
         } catch (Exception e) {
         }
+        //**********
+        this.comboAbonos.removeAllItems();
+        try {
+            res = Negocio.Conexion.Consulta("select * from Cliente");
+            while (res.next()){
+                this.comboAbonos.addItem(res.getString("IDcliente"));
+            }
+        } catch (Exception e) {
+        }
         
     }
     
@@ -132,7 +141,20 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
             }
         }catch (SQLException e){
         }
-        
+        //----------------------------------------------------------------------
+        DefaultTableModel modelo3 = (DefaultTableModel) tablaAbonos.getModel();
+        modelo3.setRowCount(0);
+        res = Negocio.Conexion.Consulta("select * from Cliente");
+        try{
+            while(res.next()){
+                Vector v = new Vector();
+                v.add(res.getInt(1));
+                v.add(res.getString(2));
+                modelo3.addRow(v);
+                tablaAbonos.setModel(modelo3);
+            }
+        }catch (SQLException e){
+        }
     }
 
     
@@ -158,6 +180,8 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
         jLabel37 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -207,13 +231,13 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
         btnEcliente = new javax.swing.JButton();
         jLabel38 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        jTextField26 = new javax.swing.JTextField();
-        jTextField27 = new javax.swing.JTextField();
-        jTextField28 = new javax.swing.JTextField();
-        jTextField29 = new javax.swing.JTextField();
-        jTextField30 = new javax.swing.JTextField();
-        jTextField31 = new javax.swing.JTextField();
-        jTextField32 = new javax.swing.JTextField();
+        txt_Rabono7 = new javax.swing.JTextField();
+        txt_Rabono6 = new javax.swing.JTextField();
+        txt_Rabono5 = new javax.swing.JTextField();
+        txt_Rabono4 = new javax.swing.JTextField();
+        txt_Rabono3 = new javax.swing.JTextField();
+        txt_Rabono2 = new javax.swing.JTextField();
+        txt_Rabono1 = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
@@ -221,8 +245,12 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        jButton12 = new javax.swing.JButton();
+        btnRabono = new javax.swing.JButton();
         jLabel36 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tablaAbonos = new javax.swing.JTable();
+        comboAbonos = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -278,6 +306,19 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
             }
         ));
         jScrollPane3.setViewportView(jTable1);
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane5.setViewportView(jTable2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -469,7 +510,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(comboRcliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(btnRcliente)
@@ -672,17 +713,43 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
         jLabel33.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel33.setText("Cantidad:");
 
-        jButton12.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jButton12.setText("REGISTRAR");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        btnRabono.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnRabono.setText("REGISTRAR");
+        btnRabono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                btnRabonoActionPerformed(evt);
             }
         });
 
         jLabel36.setBackground(new java.awt.Color(102, 102, 0));
         jLabel36.setFont(new java.awt.Font("Century Schoolbook", 1, 36)); // NOI18N
         jLabel36.setText("DATOS DE DEL ABONO.");
+
+        jLabel34.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel34.setText("IDcliente");
+
+        tablaAbonos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ID", "Nombre"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(tablaAbonos);
+
+        comboAbonos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -700,21 +767,22 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
                             .addComponent(jLabel31)
                             .addComponent(jLabel30)
                             .addComponent(jLabel32)
-                            .addComponent(jLabel33))
-                        .addGap(123, 123, 123)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField32)
-                            .addComponent(jTextField31)
-                            .addComponent(jTextField30)
-                            .addComponent(jTextField29)
-                            .addComponent(jTextField28)
-                            .addComponent(jTextField27)
-                            .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(186, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton12)
-                .addGap(362, 362, 362))
+                            .addComponent(jLabel33)
+                            .addComponent(jLabel34)
+                            .addComponent(btnRabono))
+                        .addGap(71, 71, 71)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(comboAbonos, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_Rabono1, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txt_Rabono2, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txt_Rabono3, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txt_Rabono4, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txt_Rabono5, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txt_Rabono6, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txt_Rabono7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)))))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -724,34 +792,40 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
                 .addGap(30, 30, 30)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
-                    .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Rabono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
-                    .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Rabono2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
-                    .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Rabono3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
-                    .addComponent(jTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Rabono4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31)
-                    .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Rabono5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel32)
-                    .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Rabono6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
-                    .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                .addComponent(jButton12)
-                .addGap(37, 37, 37))
+                    .addComponent(txt_Rabono7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel34)
+                    .addComponent(comboAbonos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRabono)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Registro abono", jPanel7);
@@ -827,7 +901,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
                             .addComponent(comboRcobrador, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_Rcobrador, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_Rcobrador3))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                 .addComponent(jLabel35)
                 .addGap(46, 46, 46))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -861,7 +935,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(65, 65, 65)
                 .addComponent(btnRCobrador)
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(209, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Registrar cobrador", jPanel3);
@@ -938,7 +1012,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -1057,9 +1131,42 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_Rcobrador2ActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void btnRabonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRabonoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12ActionPerformed
+        if(txt_Rabono1.getText().isEmpty() && txt_Rabono2.getText().isEmpty() && txt_Rabono3.getText().isEmpty() && txt_Rabono4.getText().isEmpty() && txt_Rabono5.getText().isEmpty() && txt_Rabono6.getText().isEmpty() && txt_Rabono7.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Ingrese bien la informacion", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            txt_Rabono1.requestFocus();
+            txt_Rabono2.requestFocus();
+            txt_Rabono3.requestFocus();
+            txt_Rabono4.requestFocus();
+            txt_Rabono5.requestFocus();
+            txt_Rabono6.requestFocus();
+            txt_Rabono7.requestFocus();
+        } else {
+            try {
+                    Abono.AgregarAbono(txt_Rabono1.getText(),Integer.parseInt(txt_Rabono2.getText()), txt_Rabono3.getText(), txt_Rabono4.getText(), txt_Rabono5.getText(), txt_Rabono6.getText(), Integer.parseInt(txt_Rabono7.getText()), Integer.parseInt(comboAbonos.getSelectedItem().toString()));
+                    txt_Rabono1.setText("");
+                    txt_Rabono2.setText("");
+                    txt_Rabono3.setText("");
+                    txt_Rabono4.setText("");
+                    txt_Rabono5.setText("");
+                    txt_Rabono6.setText("");
+                    txt_Rabono7.setText("");
+                    txt_Rabono1.requestFocus();
+                    txt_Rabono2.requestFocus();
+                    txt_Rabono3.requestFocus();
+                    txt_Rabono4.requestFocus();
+                    txt_Rabono5.requestFocus();
+                    txt_Rabono6.requestFocus();
+                    txt_Rabono7.requestFocus();
+                    comboAbonos.requestFocus();
+                    JOptionPane.showMessageDialog(this, "LOS DATOS HAN SIGO GUARDADOS CORRECTAMENTE");
+                
+            }catch (SQLException e){
+            }
+        }
+        CreaTablas();
+    }//GEN-LAST:event_btnRabonoActionPerformed
 
     private void btnMclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMclienteActionPerformed
         // TODO add your handling code here:
@@ -1219,7 +1326,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
                     txt_MdireccionCobrador.setText("");
                     txt_McelularCobrador.setText("");
                     txt_Midcobrador.requestFocus();
-                    JOptionPane.showMessageDialog(this, "LOS DATOS HAN SIGO ELIMINADOS CORRECTAMENTE");
+                    JOptionPane.showMessageDialog(this, "LOS DATOS HAN SIDO ELIMINADOS CORRECTAMENTE");
                 
             }catch (SQLException e){
             }
@@ -1231,9 +1338,11 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
     private void btnEclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEclienteActionPerformed
         // TODO add your handling code here:
         
-        if(txt_Midcliente.getText().isEmpty() && txt_MnombreCliente.getText().isEmpty() && txt_MdirCliente.getText().isEmpty() && txt_MtelCliente.getText().isEmpty() && txt_MsectorCliente.getText().isEmpty() && txt_MartCliente.getText().isEmpty() && txt_MengancheCliente.getText().isEmpty() && txt_McobradorCliente.getText().isEmpty()){
+        if(txt_Midcliente.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "Ingrese bien la informacion", "Informacion", JOptionPane.INFORMATION_MESSAGE);
             txt_Midcliente.requestFocus();
+            
+        }else{
             try {
                     Clientes.EliminarCliente(Integer.parseInt(txt_Midcliente.getText()));
                     txt_Midcliente.setText("");
@@ -1245,9 +1354,11 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
                     txt_MengancheCliente.setText("");
                     txt_McobradorCliente.setText("");
                     txt_Midcliente.requestFocus();
-                    JOptionPane.showMessageDialog(this, "LOS DATOS HAN SIGO GUARDADOS CORRECTAMENTE");
+                    JOptionPane.showMessageDialog(this, "LOS DATOS HAN SIDO ELIMINADOS CORRECTAMENTE");
                 
             }catch (SQLException e){
+                JOptionPane.showMessageDialog(null, "Error" + e.getMessage(),
+            "Error de Conexion",JOptionPane.ERROR_MESSAGE);
             }
         }
         CreaTablas();
@@ -1295,12 +1406,13 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
     private javax.swing.JButton btnMcliente;
     private javax.swing.JButton btnMcobrador;
     private javax.swing.JButton btnRCobrador;
+    private javax.swing.JButton btnRabono;
     private javax.swing.JButton btnRcliente;
+    private javax.swing.JComboBox<String> comboAbonos;
     private javax.swing.JComboBox<String> comboRcliente;
     private javax.swing.JComboBox<String> comboRcliente1;
     private javax.swing.JComboBox<String> comboRcobrador;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1331,6 +1443,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
@@ -1353,15 +1466,12 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField26;
-    private javax.swing.JTextField jTextField27;
-    private javax.swing.JTextField jTextField28;
-    private javax.swing.JTextField jTextField29;
-    private javax.swing.JTextField jTextField30;
-    private javax.swing.JTextField jTextField31;
-    private javax.swing.JTextField jTextField32;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tablaAbonos;
     private javax.swing.JTable tablaAyuda;
     private javax.swing.JTable tablaCliente;
     private javax.swing.JTable tablaCobrador;
@@ -1378,6 +1488,13 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
     private javax.swing.JTextField txt_Mnombrecobrador;
     private javax.swing.JTextField txt_MsectorCliente;
     private javax.swing.JTextField txt_MtelCliente;
+    private javax.swing.JTextField txt_Rabono1;
+    private javax.swing.JTextField txt_Rabono2;
+    private javax.swing.JTextField txt_Rabono3;
+    private javax.swing.JTextField txt_Rabono4;
+    private javax.swing.JTextField txt_Rabono5;
+    private javax.swing.JTextField txt_Rabono6;
+    private javax.swing.JTextField txt_Rabono7;
     private javax.swing.JTextField txt_Rcliente2;
     private javax.swing.JTextField txt_Rcliente3;
     private javax.swing.JTextField txt_Rcliente4;
