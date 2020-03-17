@@ -26,7 +26,7 @@ public class Clientes {
     }
     
     public static void ModificarCliente(int a1, String a2, String a3, String a4, String a5, String a6, float a7, int a8)throws SQLException{
-        CallableStatement entrada = Conexion.getConexion().prepareCall("{call ModificarCliente(?,?,?,?,?,?,?,?)}");
+        CallableStatement entrada = Conexion.getConexion().prepareCall("{call ActualizarCliente(?,?,?,?,?,?,?,?)}");
         entrada.setInt(1, a1);
         entrada.setString(2, a2);
         entrada.setString(3, a3);
