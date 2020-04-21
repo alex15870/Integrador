@@ -6,6 +6,7 @@
 package Interfaz;
 
 import Negocio.*;
+import Reportes.GenerarReporte;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -194,6 +195,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -209,9 +211,9 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
         txt_Rcliente6 = new javax.swing.JTextField();
         btnRcliente = new javax.swing.JButton();
         jLabel39 = new javax.swing.JLabel();
-        comboRcliente = new javax.swing.JComboBox<>();
+        comboRcliente = new javax.swing.JComboBox<String>();
         jLabel18 = new javax.swing.JLabel();
-        comboRcliente1 = new javax.swing.JComboBox<>();
+        comboRcliente1 = new javax.swing.JComboBox<String>();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaCliente = new javax.swing.JTable();
@@ -252,7 +254,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
         btnRabono = new javax.swing.JButton();
         jLabel36 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
-        comboAbonos = new javax.swing.JComboBox<>();
+        comboAbonos = new javax.swing.JComboBox<String>();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -263,7 +265,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
         txt_Rcobrador2 = new javax.swing.JTextField();
         txt_Rcobrador3 = new javax.swing.JTextField();
         btnRCobrador = new javax.swing.JButton();
-        comboRcobrador = new javax.swing.JComboBox<>();
+        comboRcobrador = new javax.swing.JComboBox<String>();
         jLabel35 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -341,18 +343,27 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
             }
         });
 
-        jButton3.setText("Tabla 3");
+        jButton3.setText("Abonos");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Tabla 4");
 
         jButton5.setText("Tabla 5");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Reportes");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(70, Short.MAX_VALUE)
+                .addContainerGap(68, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton5)
                     .addComponent(jButton4)
@@ -360,11 +371,17 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
                     .addComponent(jButton2)
                     .addComponent(jButton1))
                 .addGap(70, 70, 70))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jLabel11)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(78, 78, 78)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel11)
+                .addGap(43, 43, 43)
                 .addComponent(jButton1)
                 .addGap(42, 42, 42)
                 .addComponent(jButton2)
@@ -411,12 +428,12 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
         jLabel39.setFont(new java.awt.Font("Century Schoolbook", 1, 36)); // NOI18N
         jLabel39.setText("REGISTRO DEL CLIENTE.");
 
-        comboRcliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Norte", "Monte Carlo", "Villa ITSON", "Nuevo Cajeme" }));
+        comboRcliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Norte", "Monte Carlo", "Villa ITSON", "Nuevo Cajeme" }));
 
         jLabel18.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel18.setText("Cobrador");
 
-        comboRcliente1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Norte", "Monte Carlo", "Villa ITSON", "Nuevo Cajeme" }));
+        comboRcliente1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Norte", "Monte Carlo", "Villa ITSON", "Nuevo Cajeme" }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -703,7 +720,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
         jLabel34.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel34.setText("Cliente");
 
-        comboAbonos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboAbonos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -833,7 +850,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
             }
         });
 
-        comboRcobrador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Norte", "Monte Carlo", "Villa ITSON", "Nuevo Cajeme" }));
+        comboRcobrador.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Norte", "Monte Carlo", "Villa ITSON", "Nuevo Cajeme" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -1319,6 +1336,16 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
         
     }//GEN-LAST:event_btnEclienteActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        String fecha;
+        fecha=JOptionPane.showInputDialog("Ingrese la fecha para generar el reporte");
+        
+        GenerarReporte g = new GenerarReporte();
+        g.reporteAbonos(fecha);
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1373,6 +1400,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
