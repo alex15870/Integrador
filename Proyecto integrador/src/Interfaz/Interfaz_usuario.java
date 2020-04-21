@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -24,6 +25,8 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
 
     static ResultSet res;
     int cont;
+    ArrayList<String> combo1 = new ArrayList<String>();
+    ArrayList<String> combo2 = new ArrayList<String>();
     
     /**
      * Creates new form Interfaz_usuario
@@ -74,6 +77,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
             res = Negocio.Conexion.Consulta("select * from Cobrador");
             while (res.next()){
                 this.comboRcliente1.addItem(res.getString("Nombre"));
+                combo1.add(res.getString("IDcobrador"));
             }
         } catch (Exception e) {
         }
@@ -83,6 +87,8 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
             res = Negocio.Conexion.Consulta("select * from Cliente");
             while (res.next()){
                 this.comboAbonos.addItem(res.getString("Nombre"));
+                combo2.add(res.getString("IDcliente"));
+            //    
             }
         } catch (Exception e) {
         }
@@ -417,38 +423,39 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(104, 104, 104)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel39)
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(104, 104, 104)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel18))
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel39)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(188, 188, 188)
-                                .addComponent(comboRcliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(180, 180, 180)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel18))
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(comboRcliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txt_Rcliente2, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                                    .addComponent(txt_Rcliente3)
-                                    .addComponent(txt_Rcliente4)
-                                    .addComponent(txt_Rcliente5)
-                                    .addComponent(txt_Rcliente6))))))
+                                        .addGap(188, 188, 188)
+                                        .addComponent(comboRcliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGap(180, 180, 180)
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(comboRcliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(txt_Rcliente2, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                                            .addComponent(txt_Rcliente3)
+                                            .addComponent(txt_Rcliente4)
+                                            .addComponent(txt_Rcliente5)
+                                            .addComponent(txt_Rcliente6)))))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(281, 281, 281)
+                        .addComponent(btnRcliente)))
                 .addContainerGap(191, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(281, 281, 281)
-                .addComponent(btnRcliente)
-                .addGap(83, 380, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1082,8 +1089,10 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
             txt_Rabono6.requestFocus();
             txt_Rabono7.requestFocus();
         } else {
-            try {
-                    Abono.AgregarAbono(txt_Rabono1.getText(),Integer.parseInt(txt_Rabono2.getText()), txt_Rabono3.getText(), txt_Rabono4.getText(), txt_Rabono5.getText(), txt_Rabono6.getText(), Integer.parseInt(txt_Rabono7.getText()), Integer.parseInt(comboAbonos.getSelectedItem().toString()));
+            if (JOptionPane.showConfirmDialog(rootPane, "Crear abono!, ¿desea continuar?",
+                "Crear Registro", JOptionPane.WARNING_MESSAGE, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                try {
+                    Abono.AgregarAbono(txt_Rabono1.getText(),Integer.parseInt(txt_Rabono2.getText()), txt_Rabono3.getText(), txt_Rabono4.getText(), txt_Rabono5.getText(), txt_Rabono6.getText(), Integer.parseInt(txt_Rabono7.getText()), Integer.parseInt(combo2.get(comboRcliente1.getSelectedIndex())));
                     txt_Rabono1.setText("");
                     txt_Rabono2.setText("");
                     txt_Rabono3.setText("");
@@ -1102,6 +1111,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
                     JOptionPane.showMessageDialog(this, "LOS DATOS HAN SIDO GUARDADOS CORRECTAMENTE");
                 
             }catch (SQLException e){
+            }
             }
         }
         CreaTablas();
@@ -1161,9 +1171,11 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
             txt_Rcliente6.requestFocus();
             
         } else {
-            try {
-                    Clientes.AgregarCliente(txt_Rcliente2.getText(), txt_Rcliente3.getText(), txt_Rcliente4.getText(), comboRcliente.getSelectedItem().toString(), txt_Rcliente5.getText(),  Float.parseFloat(txt_Rcliente6.getText()), Integer.parseInt(comboRcliente1.getSelectedItem().toString()));
-                    
+            if (JOptionPane.showConfirmDialog(rootPane, "Crear Cliente!, ¿desea continuar?",
+                "Crear Registro", JOptionPane.WARNING_MESSAGE, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                try {
+                    Clientes.AgregarCliente(txt_Rcliente2.getText(), txt_Rcliente3.getText(), txt_Rcliente4.getText(), comboRcliente.getSelectedItem().toString(), txt_Rcliente5.getText(),  Float.parseFloat(txt_Rcliente6.getText()), Integer.parseInt(combo1.get(comboRcliente1.getSelectedIndex())));
+                    //comboRcliente1.getSelectedItem().toString()
                     txt_Rcliente2.setText("");
                     txt_Rcliente3.setText("");
                     txt_Rcliente4.setText("");
@@ -1179,7 +1191,10 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
                     JOptionPane.showMessageDialog(this, "LOS DATOS HAN SIDO GUARDADOS CORRECTAMENTE");
                 
             }catch (SQLException e){
+                    JOptionPane.showMessageDialog(null, "Error" + e.getMessage(),
+            "Error de Conexion",JOptionPane.ERROR_MESSAGE);
             }
+            } 
         }
         CreaTablas();
         
@@ -1195,7 +1210,9 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
             txt_Rcobrador2.requestFocus();
             txt_Rcobrador3.requestFocus();
         } else {
-            try {
+            if (JOptionPane.showConfirmDialog(rootPane, "Crear Cobrador!, ¿desea continuar?",
+                "Crear Registro", JOptionPane.WARNING_MESSAGE, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                try {
                     Cobrador.AgregarCobrador(txt_Rcobrador.getText(), comboRcobrador.getSelectedItem().toString(), txt_Rcobrador2.getText(), txt_Rcobrador3.getText());
                     txt_Rcobrador.setText("");
                     txt_Rcobrador2.setText("");
@@ -1207,6 +1224,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
                     JOptionPane.showMessageDialog(this, "LOS DATOS HAN SIDO GUARDADOS CORRECTAMENTE");
                 
             }catch (SQLException e){
+            }
             }
         }
         CreaTablas();
