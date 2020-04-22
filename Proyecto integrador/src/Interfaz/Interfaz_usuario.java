@@ -131,7 +131,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
         //----------------------------------------------------------------------
         DefaultTableModel modelo2 = (DefaultTableModel) tablaCliente.getModel();
         modelo2.setRowCount(0);
-        res = Negocio.Conexion.Consulta("select * from Cliente");
+        res = Negocio.Conexion.Consulta("SELECT Cliente.IDcliente, Cliente.Nombre, Cliente.Direccion,Cliente.Telefono,Cliente.Sector,Cliente.Articulo,Cliente.Enganche, Cobrador.Nombre FROM  Cliente INNER JOIN Cobrador ON Cliente.IDcobrador=Cobrador.IDcobrador");
         try{
             while(res.next()){
                 Vector v = new Vector();
@@ -142,7 +142,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
                 v.add(res.getString(5));
                 v.add(res.getString(6));
                 v.add(res.getFloat(7));
-                v.add(res.getInt(8));
+                v.add(res.getString(8));
                 modelo2.addRow(v);
                 tablaCliente.setModel(modelo2);
             }
@@ -527,7 +527,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Fecha", "Dirección", "Telefono", "Sector", "Articulo", "Enganche"
+                "ID", "Nombre", "Dirección", "Telefono", "Sector", "Articulo", "Enganche", "Cobrador"
             }
         ) {
             boolean[] canEdit = new boolean [] {
