@@ -63,4 +63,25 @@ public class GenerarReporte {
         
     }
     
+    public void reporteCliente(int id){
+        
+        try {
+            JasperReport reporte = (JasperReport) JRLoader.loadObject("src/Reportes/reportCliente.jasper");
+            Map parametro = new HashMap();
+            
+            parametro.put("Cliente", id);
+            
+            JasperPrint j = JasperFillManager.fillReport(reporte, parametro, Conexion.getConexion());
+            JasperViewer jv = new JasperViewer(j,false);
+            jv.setTitle("Reportes de abonos por cliente");
+            jv.setVisible(true);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            System.out.println(e);
+        }
+        
+        
+    }
+    
 }

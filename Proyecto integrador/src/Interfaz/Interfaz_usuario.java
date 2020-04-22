@@ -335,7 +335,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
             }
         });
 
-        jButton2.setText("Tabla 2");
+        jButton2.setText("Cliente");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -389,7 +389,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
                 .addComponent(jButton3)
                 .addGap(50, 50, 50)
                 .addComponent(jButton4)
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane5.setName("Registrar Cobrador"); // NOI18N
@@ -1069,6 +1069,8 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        ReporteCliente obj = new ReporteCliente();
+            obj.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txt_RcobradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_RcobradorActionPerformed
