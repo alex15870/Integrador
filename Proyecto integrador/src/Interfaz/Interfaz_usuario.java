@@ -194,7 +194,6 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
@@ -329,7 +328,7 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
-        jButton1.setText("Tabla1");
+        jButton1.setText("Cobradores");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -352,8 +351,6 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
 
         jButton4.setText("Tabla 4");
 
-        jButton5.setText("Tabla 5");
-
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Reportes");
@@ -365,15 +362,18 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(68, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton5)
                     .addComponent(jButton4)
                     .addComponent(jButton3)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(jButton2))
                 .addGap(70, 70, 70))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel11)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel11))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -381,17 +381,15 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel11)
-                .addGap(43, 43, 43)
+                .addGap(40, 40, 40)
                 .addComponent(jButton1)
-                .addGap(42, 42, 42)
+                .addGap(45, 45, 45)
                 .addComponent(jButton2)
                 .addGap(44, 44, 44)
                 .addComponent(jButton3)
                 .addGap(50, 50, 50)
                 .addComponent(jButton4)
-                .addGap(57, 57, 57)
-                .addComponent(jButton5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(258, Short.MAX_VALUE))
         );
 
         jTabbedPane5.setName("Registrar Cobrador"); // NOI18N
@@ -1060,10 +1058,13 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
         jTabbedPane5.getAccessibleContext().setAccessibleName("REGISTRAR COBRADOR");
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        ReporteCobrador obj = new ReporteCobrador();
+            obj.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1397,7 +1398,6 @@ public class Interfaz_usuario extends javax.swing.JFrame implements Tablas{
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

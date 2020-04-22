@@ -51,6 +51,7 @@ public class Conexion {
         try{
             declara=con.createStatement();
             ResultSet respuesta = declara.executeQuery(consulta);
+            //con.close();
             return respuesta;
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error" + e.getMessage(),
