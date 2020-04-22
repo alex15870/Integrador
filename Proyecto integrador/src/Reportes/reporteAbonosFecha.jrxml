@@ -41,22 +41,15 @@
 				<text><![CDATA[Reporte de abonos]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="172" y="94" width="383" height="42"/>
-				<textElement textAlignment="Right">
+				<reportElement x="121" y="84" width="383" height="42"/>
+				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor purus gravida arcu aliquam mattis. Donec et nulla libero, ut varius massa. Nulla sed turpis elit. Etiam aliquet mauris a ligula hendrerit in auctor leo lobortis.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Title" x="157" y="0" width="395" height="62"/>
-				<textElement verticalAlignment="Middle">
-					<font pdfFontName="Times-Roman"/>
-				</textElement>
-				<text><![CDATA[PROMOVENTAS]]></text>
+				<text><![CDATA[A menos que los reportes estén firmados por el encargado del área CON TINTA, esté documento no tiene validez para hacer alguna acalaración]]></text>
 			</staticText>
 			<image>
-				<reportElement x="0" y="0" width="157" height="136"/>
-				<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\Alex\\Documents\\hassan libro.jpg"]]></imageExpression>
+				<reportElement x="5" y="0" width="550" height="62"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\Alex\\Desktop\\Nueva carpeta\\logoPM.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
