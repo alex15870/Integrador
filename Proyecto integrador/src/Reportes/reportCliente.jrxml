@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.3310000000000004"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
@@ -33,26 +33,23 @@
 	</background>
 	<title>
 		<band height="136" splitType="Stretch">
+			<image>
+				<reportElement x="5" y="0" width="550" height="62"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\Alex\\Desktop\\Nueva carpeta\\logoPM.png"]]></imageExpression>
+			</image>
 			<staticText>
-				<reportElement style="Title" x="170" y="0" width="263" height="62"/>
-				<textElement verticalAlignment="Middle">
-					<font pdfFontName="Times-Roman"/>
-				</textElement>
-				<text><![CDATA[Coffee Title]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="SubTitle" x="219" y="62" width="196" height="22"/>
-				<textElement>
+				<reportElement style="SubTitle" x="172" y="72" width="196" height="22"/>
+				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" pdfFontName="Times-Roman"/>
 				</textElement>
-				<text><![CDATA[Coffee SubTitle]]></text>
+				<text><![CDATA[Reporte de abonos por cliente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="172" y="94" width="383" height="42"/>
-				<textElement textAlignment="Right">
+				<reportElement x="131" y="94" width="383" height="42"/>
+				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor purus gravida arcu aliquam mattis. Donec et nulla libero, ut varius massa. Nulla sed turpis elit. Etiam aliquet mauris a ligula hendrerit in auctor leo lobortis.]]></text>
+				<text><![CDATA[A menos que los reportes estén firmados por el encargado del área CON TINTA, esté documento no tiene validez para hacer alguna acalaración]]></text>
 			</staticText>
 		</band>
 	</title>
